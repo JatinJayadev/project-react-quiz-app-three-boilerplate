@@ -6,8 +6,23 @@ import { Link } from "react-router-dom";
 
 function QuizComponents() {
     const [state, setState] = useState(0)
+    const [score, setScore] = useState(0)
 
     console.log(question[state].question)
+
+
+    const handleClickOption = (selectedOption) => {
+        const answer = question[state].answer
+        if (selectedOption == answer) {
+            alert("Correct Answer!")
+            setScore(score + 1)
+            setState(state + 1)
+        }
+        else {
+            alert("Wrong Answer!!")
+            setState(state + 1)
+        }
+    }
 
     const handleClickPrev = () => {
         if (state == 0) {
@@ -37,6 +52,8 @@ function QuizComponents() {
         setState(0)
     }
 
+    console.log(score)
+
     return (
         <div className='container'>
             <h1>Question</h1>
@@ -46,10 +63,23 @@ function QuizComponents() {
             <p className='questiontag'>{question[state].question}</p>
 
             <div className='optcont'>
-                <button>{question[state].optionA}</button>
-                <button>{question[state].optionB}</button>
-                <button>{question[state].optionC}</button>
-                <button>{question[state].optionD}</button>
+
+                <button onClick={() => handleClickOption(question[state].optionA)}>
+                    {question[state].optionA}
+                </button>
+
+                <button onClick={() => handleClickOption(question[state].optionB)}>
+                    {question[state].optionB}
+                </button>
+
+                <button onClick={() => handleClickOption(question[state].optionC)}>
+                    {question[state].optionC}
+                </button>
+
+                <button onClick={() => handleClickOption(question[state].optionD)}>
+                    {question[state].optionD}
+                </button>
+
             </div>
 
             <div className='footer'>
