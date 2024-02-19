@@ -18,13 +18,13 @@ function QuizComponents() {
         const answer = question[state].answer
         setAttempt(prevAttempted => prevAttempted + 1)
         if (selectedOption == answer) {
-            // alert("Correct Answer!")
+            alert("Correct Answer!")
             setScore(prevScore => prevScore + 1)
             setState(prevState => prevState + 1)
             setCorrect(prevCorrect => prevCorrect + 1)
         }
         else {
-            // alert("Wrong Answer!!")
+            alert("Wrong Answer!!")
             setState(prevState => prevState + 1)
         }
     }
