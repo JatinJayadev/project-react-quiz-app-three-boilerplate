@@ -5,40 +5,41 @@ import question from '../resources/quizQuestion'
 import { Link } from "react-router-dom";
 
 function QuizComponents() {
+
     const [state, setState] = useState(0)
     const [score, setScore] = useState(0)
+    const [attempted, setAttempt] = useState(0)
+    const [correct, setCorrect] = useState(0)
 
-    console.log(question[state].question)
+    // console.log(question[state].question)
 
 
     const handleClickOption = (selectedOption) => {
         const answer = question[state].answer
+        setAttempt(prevAttempted => prevAttempted + 1)
         if (selectedOption == answer) {
-            alert("Correct Answer!")
-            setScore(score + 1)
-            setState(state + 1)
+            // alert("Correct Answer!")
+            setScore(prevScore => prevScore + 1)
+            setState(prevState => prevState + 1)
+            setCorrect(prevCorrect => prevCorrect + 1)
         }
         else {
-            alert("Wrong Answer!!")
-            setState(state + 1)
+            // alert("Wrong Answer!!")
+            setState(prevState => prevState + 1)
         }
     }
 
     const handleClickPrev = () => {
         if (state == 0) {
-            setState(14)
+            setState(0)
         } else {
-            setState(state - 1)
+            setState(prevState => prevState - 1)
         }
         console.log(state)
     }
 
     const handleClickNext = () => {
-        if (state == 14) {
-            setState(0)
-        } else {
-            setState(state + 1)
-        }
+        setState(prevState => prevState + 1)
         console.log(state)
     }
 
@@ -50,9 +51,21 @@ function QuizComponents() {
 
     const handleClickFinish = () => {
         setState(0)
+
     }
 
     console.log(score)
+
+    if (state == 15) {
+
+        localStorage.setItem("Score", score)
+        localStorage.setItem("Attempts", attempted)
+        localStorage.setItem("Correct", correct)
+        window.location.href = "/result"
+
+    }
+
+
 
     return (
         <div className='container'>
